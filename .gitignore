@@ -1,5 +1,6 @@
 *.mp4
 *.mov
+*.JPG
 *_train_data/
 *_labels_json/
 *_labels_txt/
