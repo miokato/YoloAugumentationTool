@@ -6,6 +6,13 @@
 3. $ mv ./images/*.json xxxx_labels_json/
 4. $ main.py piman
 
+## Ubuntu
+- Install cuda
+- Install cudnn
+
+## Tips
+- 環境依存だと思うが`gencode arch=compute_30,code_sm_30` を削除しないとyoloのコンパイルが通らない
+
 ## cfg.txt
 ```
 - batch=64
