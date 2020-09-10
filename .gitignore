@@ -1,0 +1,8 @@
+*.mp4
+*.mov
+*_train_data/
+*_labels_json/
+*_labels_txt/
+*_images/
+.DS_Store
+data/
