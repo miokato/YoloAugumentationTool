@@ -1,36 +1,16 @@
 # Yolo Augumentation Tool
 
-## Getting Started
-1. アノテーションした画像とjsonをimagesディレクトリに入れる
-2. $ mv ./images/*.png xxxx_images/
-3. $ mv ./images/*.json xxxx_labels_json/
-4. $ main.py piman
-
-## Ubuntu
-- Install cuda
-- Install cudnn
-
-## Tips
-- 環境依存だと思うが`gencode arch=compute_30,code_sm_30` を削除しないとyoloのコンパイルが通らない
-
-## cfg.txt
+## 使い方
 ```
-- batch=64
-一度に64枚づつ処理。変えない方が良い
-- subdivision=32
-一度に処理する枚数を分割する。小さいと一度にメモリに乗るが、メモリオーバーになるので、32とする
-- max_batches=6000
-最低6,000、class x 2,000
-- steps=4800, 5400
-max_batches*0.8, 0.9
-- width,height=416,416
-ネットワークサイズ、画像は自動でリサイズされて、余白はパディングされるので、大きさ、アスペクトレシオが異なる画像を使える
-- classes=1
-(自動化されている)分類するクラスの数
-- filters=255
-filters=(classes + 5) * 3
-(自動化されている)yoloレイヤーの前のフィルターの大きさは分類するクラスの数による
+-- オーギュメンテーション --
+[前提] アノテーションした画像とjsonをimagesディレクトリに格納済
+$ mkdir piman_images piman_labels_json
+$ mv ./images/*.png piman_images/
+$ mv ./images/*.json piman_labels_json/
+$ main.py piman   # --> piman_train_dataにyolo学習用データを生成
+-- 学習 --
+[前提] https://github.com/AlexeyAB/darknet をpath/to/darknetにクローンし、tinyYolov4の学習環境構築済
+$ mv piman_train_data  path/to/darknet
+$ cd path/to/darknet 
+$ sh piman_train_data/start_tiny_v4.sh 
 ```
-
-## Yolo
-`./darknet detector train xxx.data xxx.cfg yolov4.conv.137 -dont_show`
